@@ -1,0 +1,41 @@
+{
+  "name": "joi4express",
+  "version": "1.0.0",
+  "description": "Joi validator for express, validates the request and the reponse",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/standard",
+    "test": "./node_modules/.bin/mocha test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xsellier/joi4express.git"
+  },
+  "keywords": [
+    "joi",
+    "express",
+    "request",
+    "response",
+    "validate"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xsellier/joi4express/issues"
+  },
+  "homepage": "https://github.com/xsellier/joi4express#readme",
+  "peerDependencies": {
+    "joi": ">= 10.x.x",
+    "boom": ">= 5.x.x"
+  },
+  "devDependencies": {
+    "boom": ">= 5.x.x",
+    "chai": "^4.0.2",
+    "dirty-chai": "^1.2.2",
+    "joi": ">= 10.x.x",
+    "mocha": "^3.4.2",
+    "standard": "^10.0.2"
+  },
+  "standard": {
+    "env": "mocha"
+  }
+}
