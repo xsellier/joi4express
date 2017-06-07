@@ -1,6 +1,6 @@
 {
   "name": "joi4express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Joi validator for express, validates the request and the reponse",
   "main": "lib/index.js",
   "scripts": {
