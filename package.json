@@ -1,6 +1,6 @@
 {
   "name": "joi4express",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Joi validator for express, validates the request and the reponse",
   "main": "lib/index.js",
   "scripts": {
@@ -19,6 +19,10 @@
     "validate"
   ],
   "license": "MIT",
+  "engines": {
+    "node": ">= 4.x.x",
+    "npm": ">= 3.x"
+  },
   "bugs": {
     "url": "https://github.com/xsellier/joi4express/issues"
   },
