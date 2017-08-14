@@ -23,7 +23,10 @@ const helloWorld = {
       param1: Joi.array().items({
         param2: Joi.string()
       })
-    }
+    },
+    headers: Joi.object({
+      param1: Joi.string()
+    }),
   },
   response: {
     schema: Joi.object({

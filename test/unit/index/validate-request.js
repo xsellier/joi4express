@@ -18,7 +18,10 @@ describe('#index', () => {
       param1: Joi.array().items({
         param2: Joi.string()
       })
-    }
+    },
+    headers: Joi.object({
+      param1: Joi.string().required()
+    })
   }
 
   const request = {
@@ -28,7 +31,10 @@ describe('#index', () => {
     query: {
       param1: 'valid value'
     },
-    body: {}
+    body: {},
+    headers: {
+      param1: 'valid value'
+    }
   }
 
   it('should validate a request', function (done) {
