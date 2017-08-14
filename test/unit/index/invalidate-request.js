@@ -25,7 +25,10 @@ describe('#index', () => {
         param1: Joi.array().items({
           param2: Joi.string()
         })
-      }
+      },
+      headers: Joi.object({
+        param1: Joi.string().required()
+      })
     }
   }
 
@@ -54,6 +57,25 @@ describe('#index', () => {
       query: {
       },
       body: {}
+    }
+
+    joi4express(route)(request, {}, (err) => {
+      expect(err).to.exist()
+
+      done()
+    })
+  })
+
+  it('should validate a request (missing headers)', function (done) {
+    const request = {
+      params: {
+        param1: 'valid value'
+      },
+      query: {
+        param1: 'valid value'
+      },
+      body: {},
+      headers: {}
     }
 
     joi4express(route)(request, {}, (err) => {
