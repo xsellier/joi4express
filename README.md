@@ -1,4 +1,4 @@
-# joi4express [![Build Status](https://travis-ci.org/xsellier/joi4express.svg?branch=master)](https://travis-ci.org/xsellier/joi4express)
+# joi4express [![pipeline status](https://gitlab.com/xsellier/joi4express/badges/master/pipeline.svg)](https://gitlab.com/xsellier/joi4express/commits/master)
 
 Joiexpress validator
 

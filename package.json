@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xsellier/joi4express.git"
+    "url": "git+https://gitlab.com/xsellier/joi4express.git"
   },
   "keywords": [
     "joi",
@@ -24,9 +24,9 @@
     "npm": ">= 3.x"
   },
   "bugs": {
-    "url": "https://github.com/xsellier/joi4express/issues"
+    "url": "https://gitlab.com/xsellier/joi4express/issues"
   },
-  "homepage": "https://github.com/xsellier/joi4express#readme",
+  "homepage": "https://gitlab.com/xsellier/joi4express#readme",
   "peerDependencies": {
     "joi": ">= 10.x.x",
     "boom": ">= 5.x.x"
