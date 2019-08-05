@@ -50,6 +50,43 @@ app.listen(port, function () {
 })
 ```
 
+The library also accepts a Joi Options object, and a Custom Joi Error Formatting function.
+
+In the following example, double quotes will be removed due to the custom error formatting function.
+
+```js
+const customJoiErrorFormatFcn = (e) => {
+  const message = e.message.replace(/"/g, '')
+  const details = e.details.map(detail => ({
+    ...detail,
+    message: detail.message.replace(/"/g, '')
+  }))
+
+  return {
+    message,
+    details
+  }
+}
+
+const joiOptions = null // Or some desired options
+app.get('/', joi4express(helloWorld, joiOptions, customJoiErrorFormatFcn))
+```
+
+Any custom formatting function must return an object of the form:
+
+```js
+ {
+  message: 'a message string',
+  details: [
+    {
+      // Joi Error Details Object
+    }
+  ]
+}
+```
+
+If the user-defined formatting function fails, then the original message/details will be returned (as if the function was never defined in the first place)
+
 ## Installation
 
 ### Installing joi4express

@@ -36,12 +36,23 @@ describe('#index', () => {
       throw new Error('This should not be called')
     }
   }
+  const formatFcn = (e) => {
+    const message = e.message.replace(/"/g, '')
+    const details = e.details.map(detail => ({
+      ...detail,
+      message: detail.message.replace(/"/g, '')
+    }))
 
-  it('should invalidate a response (with 2xx expected status code', function (done) {
+    return {
+      message,
+      details
+    }
+  }
+
+  it('should invalidate a response (with 2xx expected status code)', (done) => {
     const expectedStatusCode = 204
-
     const route = {
-      handler: function (req, res) {
+      handler: (req, res) => {
         res.status(expectedStatusCode).send()
       },
       response: responseSchema
@@ -54,11 +65,46 @@ describe('#index', () => {
     })
   })
 
-  it('should invalidate a response (with 4xx expected status code', function (done) {
+  it('should invalidate a response (with 2xx expected status code) and should format the error messages', (done) => {
+    const expectedStatusCode = 204
+    const route = {
+      handler: (req, res) => {
+        res.status(expectedStatusCode).send()
+      },
+      response: responseSchema
+    }
+
+    joi4express(route, joiOptions, formatFcn)({}, response, (err) => {
+      expect(err).to.exist()
+      expect(err.message).to.not.contain('"')
+
+      done()
+    })
+  })
+
+  it('should invalidate a response (with 2xx expected status code) and should handle an invalid formatter string', (done) => {
+    const invalidMsgFormatter = '.01928398ad@#!'
+    const expectedStatusCode = 204
+    const route = {
+      handler: (req, res) => {
+        res.status(expectedStatusCode).send()
+      },
+      response: responseSchema
+    }
+
+    joi4express(route, joiOptions, invalidMsgFormatter)({}, response, (err) => {
+      expect(err).to.exist()
+      expect(err.message).to.contain('"')
+
+      done()
+    })
+  })
+
+  it('should invalidate a response (with 4xx expected status code)', (done) => {
     const expectedStatusCode = 404
 
     const route = {
-      handler: function (req, res) {
+      handler: (req, res) => {
         res.status(expectedStatusCode).send({})
       },
       response: responseSchema
@@ -71,11 +117,11 @@ describe('#index', () => {
     })
   })
 
-  it('should invalidate a response (with 500 unexpected status code', function (done) {
+  it('should invalidate a response (with 500 unexpected status code)', (done) => {
     const expectedStatusCode = 500
 
     const route = {
-      handler: function (req, res) {
+      handler: (req, res) => {
         res.status(expectedStatusCode).send({})
       },
       response: responseSchema

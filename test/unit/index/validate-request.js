@@ -37,9 +37,9 @@ describe('#index', () => {
     }
   }
 
-  it('should validate a request', function (done) {
+  it('should validate a request', (done) => {
     const route = {
-      handler: function (req, res) {
+      handler: (req, res) => {
         expect(req).to.deep.equal(request)
 
         done()
