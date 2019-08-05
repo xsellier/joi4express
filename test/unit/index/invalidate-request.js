@@ -11,7 +11,7 @@ const joi4express = require('../../../lib')
 
 describe('#index', () => {
   const route = {
-    handler: function (req, res) {
+    handler: (req, res) => {
       throw new Error('This should not be called')
     },
     validate: {
@@ -32,7 +32,7 @@ describe('#index', () => {
     }
   }
 
-  it('should validate a request (missing param)', function (done) {
+  it('should validate a request (missing param)', (done) => {
     const request = {
       params: {
       },
@@ -49,7 +49,7 @@ describe('#index', () => {
     })
   })
 
-  it('should validate a request (missing query)', function (done) {
+  it('should validate a request (missing query)', (done) => {
     const request = {
       params: {
         param1: 'valid value'
@@ -66,7 +66,7 @@ describe('#index', () => {
     })
   })
 
-  it('should validate a request (missing headers)', function (done) {
+  it('should validate a request (missing headers)', (done) => {
     const request = {
       params: {
         param1: 'valid value'

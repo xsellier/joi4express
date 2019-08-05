@@ -50,6 +50,23 @@ app.listen(port, function () {
 })
 ```
 
+The library also accepts Joi Options, and a Custom Joi Error Formatting option (a string).
+
+In the following example, double quotes will be removed due to the custom error formatting expression.
+
+```js
+const removeDoubleQuotesFormatter = 'replace(/"/g, "")'
+const joiOptions = null // Or some desired options
+app.get('/', joi4express(helloWorld, joiOptions, removeDoubleQuotesFormatter))
+```
+
+The eval() command is run against the formatter string in the following way:
+
+```js
+message = eval(`err.message.${formatter}`)
+details[].message = eval(`details[].message.${formatter}`) // for each message in the array of details.
+````
+
 ## Installation
 
 ### Installing joi4express

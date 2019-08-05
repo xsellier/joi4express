@@ -59,3 +59,11 @@ typings/
 
 # vscode config directory
 .vscode/
+
+# Automatically generated coverage files
+coverage/
+coverage-integration/
+
+# Automatically generated mochawesome-report
+mochawesome-report/
+mochawesome-report-integration/

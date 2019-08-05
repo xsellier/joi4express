@@ -1,0 +1,17 @@
+{
+  "extends": "standard",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "globals": {
+    "sinon": false,
+    "before": false,
+    "after": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "describe": false,
+    "it": false,
+    "expect": false,
+    "assert": false
+  }
+}
