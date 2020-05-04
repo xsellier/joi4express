@@ -37,7 +37,7 @@ describe('#index', () => {
       throw new Error('This should not be called')
     }
   }
-  const formatFcn = (e) => {
+  const joiErrorFormatter = (e) => {
     const message = e.message.replace(/"/g, '')
     const details = e.details.map(detail => ({
       ...detail,
@@ -60,7 +60,7 @@ describe('#index', () => {
       response: responseSchema
     }
 
-    joi4express(route, joiOptions, null, { invalidResponseLogger })({}, response, (err) => {
+    joi4express(route, joiOptions, { invalidResponseLogger })({}, response, (err) => {
       expect(err).to.exist()
       sinon.assert.calledOnce(invalidResponseLogger)
 
@@ -77,7 +77,7 @@ describe('#index', () => {
       response: responseSchema
     }
 
-    joi4express(route, joiOptions, formatFcn)({}, response, (err) => {
+    joi4express(route, joiOptions, { joiErrorFormatter })({}, response, (err) => {
       expect(err).to.exist()
       expect(err.message).to.not.contain('"')
 
@@ -86,7 +86,7 @@ describe('#index', () => {
   })
 
   it('should invalidate a response (with 2xx expected status code) and should handle an invalid formatter string', (done) => {
-    const invalidMsgFormatter = '.01928398ad@#!'
+    const invalidJoiErrorFormatter = '.01928398ad@#!'
     const expectedStatusCode = 204
     const route = {
       handler: (req, res) => {
@@ -95,7 +95,7 @@ describe('#index', () => {
       response: responseSchema
     }
 
-    joi4express(route, joiOptions, invalidMsgFormatter)({}, response, (err) => {
+    joi4express(route, joiOptions, { joiErrorFormatter: invalidJoiErrorFormatter })({}, response, (err) => {
       expect(err).to.exist()
       expect(err.message).to.contain('"')
 

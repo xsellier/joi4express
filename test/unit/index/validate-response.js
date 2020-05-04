@@ -154,6 +154,6 @@ describe('#index', () => {
       response: responseSchema
     }
 
-    joi4express(route, null, null, { failOnResponseMisformat: false, invalidResponseLogger })({}, response, done)
+    joi4express(route, null, { failOnResponseMisformat: false, invalidResponseLogger })({}, response, done)
   })
 })
