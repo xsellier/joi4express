@@ -127,4 +127,30 @@ describe('#index', () => {
 
     joi4express(route)({}, response, done)
   })
+
+  it('should validate an invalid response if failOnResponseMisformat option is false', (done) => {
+    const expectedStatusCode = 204
+    const expectedOutput = { param2: 12 }
+    const response = {
+      status: (code) => {
+        response.statusCode = code
+
+        return response
+      },
+      send: (body) => {
+        expect(response.statusCode).to.equal(expectedStatusCode)
+        expect(body).to.equal(expectedOutput)
+
+        done()
+      }
+    }
+    const route = {
+      handler: (req, res) => {
+        res.status(expectedStatusCode).send(expectedOutput)
+      },
+      response: responseSchema
+    }
+
+    joi4express(route, null, null, { failOnResponseMisformat: false })({}, response, done)
+  })
 })
