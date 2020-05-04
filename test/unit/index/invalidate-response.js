@@ -1,6 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
+const sinon = require('sinon')
 const chai = require('chai')
 const dirtyChai = require('dirty-chai')
 
@@ -50,6 +51,7 @@ describe('#index', () => {
   }
 
   it('should invalidate a response (with 2xx expected status code)', (done) => {
+    const invalidResponseLogger = sinon.stub()
     const expectedStatusCode = 204
     const route = {
       handler: (req, res) => {
@@ -58,8 +60,9 @@ describe('#index', () => {
       response: responseSchema
     }
 
-    joi4express(route, joiOptions)({}, response, (err) => {
+    joi4express(route, joiOptions, null, { invalidResponseLogger })({}, response, (err) => {
       expect(err).to.exist()
+      sinon.assert.calledOnce(invalidResponseLogger)
 
       done()
     })

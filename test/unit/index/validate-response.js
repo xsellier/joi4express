@@ -1,6 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
+const sinon = require('sinon')
 const chai = require('chai')
 const dirtyChai = require('dirty-chai')
 
@@ -129,6 +130,7 @@ describe('#index', () => {
   })
 
   it('should validate an invalid response if failOnResponseMisformat option is false', (done) => {
+    const invalidResponseLogger = sinon.stub()
     const expectedStatusCode = 204
     const expectedOutput = { param2: 12 }
     const response = {
@@ -140,6 +142,7 @@ describe('#index', () => {
       send: (body) => {
         expect(response.statusCode).to.equal(expectedStatusCode)
         expect(body).to.equal(expectedOutput)
+        sinon.assert.calledOnce(invalidResponseLogger)
 
         done()
       }
@@ -151,6 +154,6 @@ describe('#index', () => {
       response: responseSchema
     }
 
-    joi4express(route, null, null, { failOnResponseMisformat: false })({}, response, done)
+    joi4express(route, null, null, { failOnResponseMisformat: false, invalidResponseLogger })({}, response, done)
   })
 })
