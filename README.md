@@ -87,6 +87,10 @@ Any custom formatting function must return an object of the form:
 
 If the user-defined formatting function fails, then the original message/details will be returned (as if the function was never defined in the first place)
 
+The library also accepts some custom options in the form of `joi4expressOptions`, the optional 4th parameter to `joi4express`. These options include:
+- **failOnResponseMisformat** (default `true`): If false, the response will be returned even if its format validation fail. However, the `invalidResponseLogger` function will still be invoked if provided.
+- **invalidResponseLogger**: If provided, this function will be invoked with the formatted Joi error (including the formatting performed by a Custom Joi Error Formatting function) as well as the original Joi error.
+
 ## Installation
 
 ### Installing joi4express
